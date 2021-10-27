@@ -1,16 +1,29 @@
 package com.coffee.Coffee.project;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
 
+@Entity
+@Table
 public class Project {
-
-    private Integer id;
+    @Id
+    @SequenceGenerator(
+            name = "project_sequence",
+            sequenceName = "project_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "project_sequence"
+    )
+    private Long id;
     private String projectName;
     private String type;
     private String status;
     private String geography;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String ownerOrg;
 
 
@@ -18,7 +31,8 @@ public class Project {
 
     }
 
-    public Project(Integer id, String projectName, String type, String status, String geography, LocalDateTime startDate, LocalDateTime endDate, String ownerOrg) {
+
+    public Project(Long id, String projectName, String type, String status, String geography, LocalDate startDate, LocalDate endDate, String ownerOrg) {
         this.id = id;
         this.projectName = projectName;
         this.type = type;
@@ -29,7 +43,7 @@ public class Project {
         this.ownerOrg = ownerOrg;
     }
 
-    public Project(String projectName, String type, String status, String geography, LocalDateTime startDate, LocalDateTime endDate, String ownerOrg) {
+    public Project(String projectName, String type, String status, String geography, LocalDate startDate, LocalDate endDate, String ownerOrg) {
         this.projectName = projectName;
         this.type = type;
         this.status = status;
@@ -39,11 +53,11 @@ public class Project {
         this.ownerOrg = ownerOrg;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -79,19 +93,19 @@ public class Project {
         this.geography = geography;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

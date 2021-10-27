@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class ProjectService {
+
     private static ProjectRepository projectRepository;
+
 
     @Autowired
     public ProjectService(ProjectRepository projectRepository){this.projectRepository = projectRepository;}
@@ -27,7 +30,7 @@ public class ProjectService {
 
     public List<Project> getProjects(){return projectRepository.findAll();}
 
-    public void deleteProject(Integer projectId){
+    public void deleteProject(Long projectId){
         boolean exists = projectRepository.existsById(projectId);
         if(!exists){
             throw new IllegalStateException("student with id: " + projectId + " does not exist");
@@ -36,7 +39,7 @@ public class ProjectService {
     }
 
     @Transactional
-    public void updateProject(Integer projectId, String projectName, String status){
+    public void updateProject(Long projectId, String projectName, String status){
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new IllegalStateException("project with id: " + projectId + " does not exist"));
 

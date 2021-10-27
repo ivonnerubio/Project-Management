@@ -1,10 +1,11 @@
 package com.coffee.Coffee.project;
 
 
-import org.atmosphere.config.service.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -23,13 +24,13 @@ public class ProjectController {
     public void registerNewProject(@RequestBody Project project){projectService.addNewProject(project);}
 
     @DeleteMapping(path="{projectId}")
-    public void deleteProject(@PathVariable("projectId")Integer projectId){
+    public void deleteProject(@PathVariable("projectId")Long projectId){
         projectService.deleteProject(projectId);
     }
 
     @PutMapping(path="{projectId}")
     public void updateProject(
-        @PathVariable("projectId") Integer projectId,
+        @PathVariable("projectId") Long projectId,
         @RequestParam(required = false) String projectName,
         @RequestParam(required = false) String status
     ){
