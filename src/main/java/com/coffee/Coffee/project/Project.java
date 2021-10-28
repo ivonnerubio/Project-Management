@@ -2,7 +2,6 @@ package com.coffee.Coffee.project;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
 
 @Entity
 @Table
@@ -94,7 +93,7 @@ public class Project {
     }
 
     public LocalDate getStartDate() {
-        return startDate;
+        return LocalDate.now();
     }
 
     public void setStartDate(LocalDate startDate) {
@@ -102,7 +101,7 @@ public class Project {
     }
 
     public LocalDate getEndDate() {
-        return endDate;
+        return LocalDate.of(2025,12,31);
     }
 
     public void setEndDate(LocalDate endDate) {
