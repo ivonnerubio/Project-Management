@@ -89,7 +89,7 @@ public class Project {
     }
 
     public void setGeography(String geography) {
-        this.geography = geography;
+        this.geography = geography  ;
     }
 
     public LocalDate getStartDate() {
