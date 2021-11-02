@@ -3,8 +3,13 @@ package com.coffee.Coffee.project;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table
+@Entity(name = "Project")
+@Table(
+        name = "project",
+        uniqueConstraints = {
+                @UniqueConstraint(name= "project_name_unique", columnNames = "project_name")
+        }
+)
 public class Project {
     @Id
     @SequenceGenerator(
@@ -16,13 +21,43 @@ public class Project {
             strategy = GenerationType.SEQUENCE,
             generator = "project_sequence"
     )
+    @Column(
+            name = "id",
+            updatable = false
+    )
     private Long id;
+    @Column(
+            name = "project_name",
+            nullable = false,
+            columnDefinition = "TEXT"
+
+    )
     private String projectName;
+    @Column(
+            name = "type",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String type;
+    @Column(
+            name = "status",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String status;
+    @Column(
+            name = "geography",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String geography;
     private LocalDate startDate;
     private LocalDate endDate;
+    @Column(
+            name = "owner_org",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
     private String ownerOrg;
 
 
