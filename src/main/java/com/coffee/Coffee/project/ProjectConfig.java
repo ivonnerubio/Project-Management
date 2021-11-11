@@ -23,9 +23,28 @@ public class ProjectConfig {
                         "Star Wars Industries"
                     );
 
+            Project green = new Project(
+                    "Green",
+                    "Energy",
+                    "Open",
+                    "Iceland",
+                    LocalDate.of(2021, 11, 9),
+                    LocalDate.of(2025, 12, 31),
+                    "Green Technologies"
+            );
+
+            Project sheldon = new Project(
+                    "Sheldon",
+                    "Physics",
+                    "Open",
+                    "California",
+                    LocalDate.of(2021, 11, 10),
+                    LocalDate.of(2021, 12, 31),
+                    "Big Bang Sciences"
+            );
 
             repository.saveAll(
-                    List.of(skywalker)
+                    List.of(skywalker, green, sheldon)
             );
         };
     }

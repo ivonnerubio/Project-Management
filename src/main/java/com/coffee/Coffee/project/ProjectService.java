@@ -1,6 +1,8 @@
 package com.coffee.Coffee.project;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -57,4 +59,21 @@ public class ProjectService {
 
 
     }
+
+    public List<Project> findAllProjects(String filterText){
+        if(filterText == null || filterText.isEmpty()){
+            return projectRepository.findAll();
+        }
+        else{
+            return projectRepository.search(filterText);
+        }
+    }
+
+    public long countProjects(){
+        return projectRepository.count();
+    }
+
+
+
+
 }
