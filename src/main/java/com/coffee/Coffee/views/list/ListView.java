@@ -12,9 +12,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
-import java.util.Collections;
-
-@Route()
+@Route("list")
 public class ListView extends VerticalLayout {
 
     final Grid<Project> grid;
@@ -24,28 +22,24 @@ public class ListView extends VerticalLayout {
     ProjectForm form;
 
 
-    public ListView(ProjectRepository repo) {
+    public ListView(ProjectRepository repo, ProjectService service) {
         this.repo = repo;
+        this.service = service;
         setSizeFull();
 
-      //  configureGrid();
-       configureForm();
+        configureForm();
+
 
         this.grid = new Grid<>(Project.class);
 
-       add(
-                  getToolbar(),
-                  getContent()
+        add(
+                getToolbar(),
+                getContent()
         );
 
-        listProjects();
-   //     updateList();
-    }
+        updateList();
 
-    private void updateList() {
-        grid.setItems(service.findAllProjects(filterText.getValue()));
     }
-
 
     private Component getContent() {
         HorizontalLayout content = new HorizontalLayout(grid, form);
@@ -53,6 +47,7 @@ public class ListView extends VerticalLayout {
         content.setFlexGrow(1, form);
         content.addClassName("content");
         content.setSizeFull();
+        grid.setItems(repo.findAll());
 
         return content;
     }
@@ -60,16 +55,6 @@ public class ListView extends VerticalLayout {
     private void configureForm() {
         form = new ProjectForm(repo.findAll());
         form.setWidth("25em");
-
-    }
-
-    private void configureGrid() {
-        grid.addClassNames("contact-grid");
-        grid.setSizeFull();
-        grid.setColumns("Status", "Project Name");
-        grid.addColumn(project -> project.getStatus()).setHeader("Status");
-        grid.addColumn(project -> project.getProjectName()).setHeader("Project Name");
-        grid.getColumns().forEach(col -> col.setAutoWidth(true));
     }
 
     private HorizontalLayout getToolbar() {
@@ -85,8 +70,7 @@ public class ListView extends VerticalLayout {
         return toolbar;
     }
 
-    private void listProjects() {
-        grid.setItems(repo.findAll());
+    private void updateList() {
+        grid.setItems(service.getProjectsByName(filterText.getValue()));
     }
-
 }

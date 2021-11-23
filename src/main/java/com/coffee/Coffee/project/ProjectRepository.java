@@ -14,7 +14,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query("SELECT p FROM Project p WHERE p.projectName= ?1")
     Optional<Project> findProjectByProjectName(String projectName);
 
-    @Query("SELECT p FROM Project p "+
+    @Query("SELECT p FROM Project p " +
             "where lower(p.projectName) like lower(concat('%', :searchTerm, '%'))")
-    List<Project> search(@Param("searchTerm")String searchTerm);
+    List<Project> search(@Param("searchTerm") String searchTerm);
 }

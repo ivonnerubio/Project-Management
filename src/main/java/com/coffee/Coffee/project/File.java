@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Entity(name = "File")
-@Table(name = "file")
+@Entity(name="File")
+@Table(name="file")
 public class File {
 
     @Id
